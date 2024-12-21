@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Defensas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1d1d1d;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 0,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .team-logo {
+            max-width: 100%;
+            height: auto;
+        }
+        .player-card {
+            background-color: #222;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .player-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .starting-lineup {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .highlight {
+            background-color: rgb(57, 71, 172);
+            padding: 2px 5px;
+            border-radius: 4px;
+            overflow-x: hidden;
+        }
+        .player-card img {
+            margin-bottom: 5px;  /* Esto agrega espacio debajo de la imagen */
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #f0f0f0;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            color: #ff6b6b;
+        }
+        #tittle {
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='/'">&larr;</button>
+    <div class="container py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="static\positions\defender.png" alt="Team Logo" class="team-logo" style="width: 100px; height: auto;">
+                </div>
+                <h2 class="text-center mt-3">ESTADISTICAS</h2>
+                <p class="text-center"><strong>Entradas Ganadas:</strong> Desarmes exitosos que permiten recuperar la posesión del balón.</p>
+                <p class="text-center"><strong>Intercepciones:</strong> Acciones en las que el jugador corta un pase del equipo contrario.</p>
+                <p class="text-center"><strong>Despejes:</strong> Balones alejados de la zona de peligro para evitar oportunidades de gol.</p>
+                <p class="text-center"><strong>Tiros Bloqueados:</strong> Disparos del rival que son interceptados antes de llegar al arco.</p>
+                <p class="text-center"><strong>Duelos Aéreos Ganados:</strong> Saltos en los que el jugador vence a su oponente para ganar la posesión del balón.</p>
+                <a href="{{ url_for('defendersstats') }}">
+                    <div class="text-center"> <button type="button" class="btn btn-primary">Gráficas Generales</button> </div>
+                </a>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-9">
+                <h1 class="text-center" id="tittle"> TOP 5 MEJOR VALORADOS EN EL MERCADO</h1>
+                <div class="starting-lineup">
+                    {% for defensa in defensas %}
+                    <div class="player-card">
+                        <!-- Imagenes generadas dinámicamente -->
+                        <img src="{{ url_for('static', filename='defenders/player' + loop.index|string + '.jpg') }}" alt="{{ defensa.nombre }}">
+                        <p><span class="highlight">{{ defensa.nombre }}</span></p>
+                        <p>Nacionalidad: {{ defensa.nacionalidad }}</p>
+                        <p>Equipo: {{ defensa.equipo }}</p>
+                        <p>Edad: {{ defensa.edad }}</p>
+                        <p>Valor: ${{ defensa.valor }}</p>
+                        <p>Entradas Ganadas: {{ defensa.entradas_ganadas }}</p>
+                        <p>Intercepciones: {{ defensa.intercepciones }}</p>
+                        <p>Despejes: {{ defensa.despejes }}</p>
+                        <p>Tiros Bloqueados: {{ defensa.tiros_bloqueados }}</p>
+                        <p>Duelos Aéreos Ganados: {{ defensa.duelos_ganados }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

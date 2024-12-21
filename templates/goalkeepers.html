@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Porteros</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1d1d1d;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 0,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .team-logo {
+            max-width: 100%;
+            height: auto;
+        }
+        .player-card {
+            background-color: #222;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .player-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .starting-lineup {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .highlight {
+            background-color: rgb(57, 71, 172);
+            padding: 2px 5px;
+            border-radius: 4px;
+            overflow-x: hidden;
+        }
+        .player-card img {
+            margin-bottom: 5px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #f0f0f0;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            color: #ff6b6b;
+        }
+        #tittle {
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='/'">&larr;</button>
+    <div class="container py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="static\positions\goalkeeper.png" alt="Team Logo" class="team-logo" style="width: 200px; height: auto;">
+                </div>
+                <h2 class="text-center mt-3">ESTADÍSTICAS</h2>
+                <p class="text-center"><strong>Goles en Contra:</strong> Número de goles permitidos.</p>
+                <p class="text-center"><strong>Salvadas:</strong> Atajadas realizadas durante los partidos.</p>
+                <p class="text-center"><strong>Porcentaje de Porterías a Cero:</strong> Porcentaje de partidos sin recibir goles.</p>
+                <p class="text-center"><strong>Pases Completados:</strong> Pases exitosos realizados por el portero.</p>
+                <p class="text-center"><strong>Centros Detenidos:</strong> Centros interceptados.</p>
+                <a href="{{ url_for('goalkeepersstats') }}">
+                    <div class="text-center"><button type="button" class="btn btn-primary">Gráficas Generales</button></div>
+                </a>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-9">
+                <h1 class="text-center" id="tittle">TOP 5 MEJOR VALORADOS EN EL MERCADO</h1>
+                <div class="starting-lineup">
+                    {% for portero in porteros %}
+                    <div class="player-card">
+                        <!-- Imagenes generadas dinámicamente -->
+                        <img src="{{ url_for('static', filename='goalkeepers/player' + loop.index|string + '.jpg') }}" alt="{{ portero.nombre }}">
+                        <p><span class="highlight">{{ portero.nombre }}</span></p>
+                        <p>Nacionalidad: {{ portero.nacionalidad }}</p>
+                        <p>Equipo: {{ portero.equipo }}</p>
+                        <p>Edad: {{ portero.edad }}</p>
+                        <p>Valor: ${{ portero.valor }}</p>
+                        <p>Goles en Contra: {{ portero.goals_against_gk }}</p>
+                        <p>Salvadas: {{ portero.saves }}</p>
+                        <p>Porcentaje de Porterías a Cero: {{ portero.clean_sheets_pct }}</p>
+                        <p>Pases Completados: {{ portero.passes_completed_gk }}</p>
+                        <p>Centros Detenidos: {{ portero.crosses_stopped_gk }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Mediocampistas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1d1d1d;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 0,
+                rgba(255, 255, 255, 0.05) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .team-logo {
+            max-width: 100%;
+            height: auto;
+        }
+        .player-card {
+            background-color: #222;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .player-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .starting-lineup {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .highlight {
+            background-color: rgb(57, 71, 172);
+            padding: 2px 5px;
+            border-radius: 4px;
+            overflow-x: hidden;
+        }
+    .player-card img {
+        margin-bottom: 5px;  /* Esto agrega espacio debajo de la imagen */
+    }
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: none;
+        border: none;
+        color: #f0f0f0;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .back-button:hover {
+        color: #ff6b6b;
+    }
+    #tittle {
+        color: #f0f0f0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-bottom: 2 px;
+    }
+</style>
+
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='/'">&larr;</button>
+    <div class="container py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="static\positions\midfielder.png" alt="Team Logo" class="team-logo" style="width: 200px; height: auto;">
+                </div>
+                <h2 class="text-center mt-3">ESTADISTICAS</h2>
+                <p class="text-center "><strong>Pases Completados: </strong> Pases que llegan al jugador de destino.</p>
+                <p class="text-center "><strong>Regates Completados: </strong> Fintas que permiten superar adversarios exitosamente.</p>
+                <p class="text-center "><strong>Pases Progresivos:</strong>Pases que permiten avanzar en la construcción de juego.</p>
+                <p class="text-center "><strong>Tiros Asistidos:</strong>Pases que conducen a un disparo a portería por parte del receptor del balón.</p>
+                <a href="{{ url_for('midfieldersstats') }}">
+                    <div class="text-center"> <button type="button" class="btn btn-primary ">Gráficas Generales</button> </div>
+                </a>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-9">
+                <h1 class="text-center" id="tittle">TOP 5 MEJOR VALORADOS EN EL MERCADO</h1>
+                <div class="starting-lineup">
+                    {% for mediocampista in mediocampistas %}
+                    <div class="player-card">
+                        <!-- Imagenes generadas dinámicamente -->
+                        <img src="{{ url_for('static', filename='midfielders/player' + loop.index|string + '.jpg') }}" alt="{{ mediocampista.nombre }}">
+                        <p><span class="highlight">{{ mediocampista.nombre }}</span></p>
+                        <p>Nacionalidad: {{ mediocampista.nacionalidad }}</p>
+                        <p>Equipo: {{ mediocampista.equipo }}</p>
+                        <p>Edad: {{ mediocampista.edad }}</p>
+                        <p>Valor: ${{ mediocampista.valor }}</p>
+                        <p>Pases Completados: {{ mediocampista.pases_completados }}</p>
+                        <p>Regates Completados: {{ mediocampista.regates_completados }}</p>
+                        <p>Pases Progresivos: {{ mediocampista.pases_progresivos }}</p>
+                        <p>Tiros Asistidos: {{ mediocampista.tiros_asistidos }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas Delanteros</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="positionstats.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<style>
+    body {
+        background: #1d1d1d;
+        color: #f0f0f0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .chart-card {
+        background-color: #222;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+        border: 2px solid #333;
+    }
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: none;
+        border: none;
+        color: #f0f0f0;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .back-button:hover {
+        color: #ff6b6b;
+    }
+    .chart-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #f0f0f0;
+    }
+    h1 {
+        text-align: center;
+        margin: 20px 0;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <button class="back-button" onclick="window.location.href='/forwards'">&larr;</button>
+    <div class="container py-4">
+        <h1>Estadísticas de Delanteros</h1>
+        <!-- Primera gráfica (ocupa toda la fila) -->
+        <div class="row">
+            <div class="col-12">
+                <div class="chart-card" data-graph="{{ graphs[0] }}">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Otras gráficas (dos por fila) -->
+        <div class="row">
+            <!-- Segunda gráfica -->
+            <div class="col-md-6">
+                <div class="chart-card" data-graph="{{ graphs[1] }}">
+                    <div id="chart2"></div>
+                </div>
+            </div>
+            <!-- Tercera gráfica -->
+            <div class="col-md-6">
+                <div class="chart-card" data-graph="{{ graphs[2] }}">
+                    <div id="chart3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Cuarta gráfica -->
+            <div class="col-md-6">
+                <div class="chart-card" data-graph="{{ graphs[3] }}">
+                    <div id="chart4"></div>
+                </div>
+            </div>
+            <!-- Quinta gráfica -->
+            <div class="col-md-6">
+                <div class="chart-card" data-graph="{{ graphs[4] }}">
+                    <div id="chart5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/graphics.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
