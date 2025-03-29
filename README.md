@@ -1,4 +1,4 @@
-Football_Data_Analysis_SIC
+#Football_Data_Analysis_SIC
 
 Este proyecto tiene como objetivo el análisis de los rendimientos de los jugadores de fútbol durante la temporada 2019-2020. Utilizando tecnologías como Pandas, Flask, JavaScript y Plotly, el proyecto permite procesar y visualizar datos estadísticos de manera interactiva en una interfaz web. El análisis se centra en métricas clave como goles, asistencias, minutos jugados, y otras estadísticas relevantes para evaluar el rendimiento de los jugadores a lo largo de la temporada.
 Descripción
